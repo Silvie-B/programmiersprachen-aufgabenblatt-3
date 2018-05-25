@@ -1,6 +1,7 @@
 #include <list>
 #include <set>
 #include <map>
+#include <vector>
 #include <iostream>
 #include <cstdlib>
 #include "aufgabe_2_und_3.hpp"
@@ -11,6 +12,8 @@ int main()
     std::list<unsigned int> clist;
     std::set<unsigned int> cSet;
     std::multimap<unsigned int, unsigned int> cMultiMap;
+    std::vector<unsigned int> cVector;
+    
     for(int i = 0; i < 100; i++)
     {
         cMultiMap.insert({i, 0});
@@ -19,6 +22,9 @@ int main()
         cSet.insert(rndm);
         cMultiMap.insert({rndm, rndm});
     }
+    
+    //Aufgabe 3.10
+    std::copy(clist.begin(), clist.end(), cVector.begin());
     
     for (int j = 0; j<=100; j++)
     {
