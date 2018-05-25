@@ -1,4 +1,6 @@
 #include <list>
+#include <set>
+#include <map>
 #include <iostream>
 #include <cstdlib>
 #include "aufgabe_2_und_3.hpp"
@@ -7,31 +9,41 @@
 int main()
 {
     std::list<unsigned int> clist;
-    
+    std::set<unsigned int> cSet;
+    std::multimap<unsigned int, unsigned int> cMultiMap;
     for(int i = 0; i < 100; i++)
-        clist.push_back(rand() % 101);
-    
-    int counter[101] = {};
-    for (unsigned int num : clist)
     {
-        counter[num]++;
+        cMultiMap.insert({i, 0});
+        unsigned int rndm = rand() %101;
+        clist.push_back(rndm);
+        cSet.insert(rndm);
+        cMultiMap.insert({rndm, rndm});
     }
     
-    int diffNums = 0;
-    for (int j = 0; j <= 100; j++)
+    for (int j = 0; j<=100; j++)
     {
-        if (counter[j] != 0)
-            diffNums++;
+        auto num = cMultiMap.equal_range(j);
+        int count = 0;
+        unsigned int number;
+            for (auto it=num.first; it != num.second; it++)
+            {
+                if((*it).second != 0)
+                    count++;
+                number = (*it).first;
+            }
+            std::cout << number << " : " << count <<std::endl;
     }
 
-    std::cout << diffNums << " different numbers in the list" << std::endl;
-    
+    int countDiff = 0;
     for(int k = 0; k <= 100; k++)
     {
-        bool found = std::find(clist.begin(), clist.end(), k) != clist.end();
-        if (!found)
+        if (cSet.count(k) == 0)
+        {
+            countDiff++;
             std::cout << k <<std::endl;
+        }
     }
+    std::cout << (100 - countDiff) << " verschiende Zahlen in der Liste" << std::endl;
     return 0;
 }
 
