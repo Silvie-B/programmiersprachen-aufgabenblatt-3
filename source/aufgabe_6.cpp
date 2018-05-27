@@ -33,7 +33,12 @@ TEST_CASE("testing_aufgabe_6" , "[sorted_vector]")
     
     std::sort(sorted_circles.begin(), sorted_circles.end());
     
+    //Aufgabe 7
     std::sort(sorted_circles2.begin(), sorted_circles2.end(),[] (Circle c1, Circle c2) {return c1.radius < c2.radius;} );
     
+//Test Aufgabe 6
+REQUIRE(std::is_sorted(sorted_circles.begin(), sorted_circles.end()));
+//Test Aufgabe 7
 REQUIRE(std::is_sorted(sorted_circles2.begin(), sorted_circles2.end()));
+
 }
